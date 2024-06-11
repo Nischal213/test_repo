@@ -1,4 +1,4 @@
-class Node:
+**class Node:
     # A node is in the form
     # (data , pointer to next nodes)
     def __init__(self, data) -> None:
@@ -138,3 +138,4 @@ instance.add_item(3)
 instance.add_item(4)
 print(instance.reverse_list())
 instance.display()
+**
