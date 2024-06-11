@@ -1,4 +1,4 @@
-**class Node:
+class Node:
     # A node is in the form
     # (data , pointer to next nodes)
     def __init__(self, data) -> None:
@@ -103,7 +103,11 @@ class LinkedList:
 
     def reverse_list(self):
         if self.size == 2:
-            pass        
+            current_node = self.head
+            next_node = current_node.next
+            current_node.next = None
+            next_node.next = current_node
+            self.head = next_node
         elif self.size > 2:
             current_node = self.head
             next_node = current_node.next
@@ -138,4 +142,3 @@ instance.add_item(3)
 instance.add_item(4)
 print(instance.reverse_list())
 instance.display()
-**
