@@ -11,7 +11,9 @@ class LinkedList:
     def __init__(self) -> None:
         self.head = None
         self.size = 0
-
+    """
+    Made with assistance from chatgpt
+    """
     def add_item(self, item):
         new_node = Node(item)
         if self.head is None:
@@ -30,7 +32,9 @@ class LinkedList:
             current_node.next = new_node
         self.size += 1
         return "Item successfully added"
-
+    """
+    Made by myself
+    """
     def remove_item(self, item):
         if self.size == 0:
             return "Linked list is empty"
@@ -60,7 +64,9 @@ class LinkedList:
             previous_node.next = current_node.next
         self.size -= 1
         return "Item has been successfully removed"
-
+    """
+    Made by myself
+    """
     def insert_item(self, index, item):
         # Indexing starts from zero this
         # indicates inserting item at the
@@ -100,29 +106,72 @@ class LinkedList:
                 new_node.next = current_node
         self.size += 1
         return "Item has been inserted successfully"
-
+    """
+    Made by chatgpt, although there is
+    an alternate version made by me but
+    it is less effficient
+    """
     def reverse_list(self):
-        if self.size == 2:
+        if self.size >= 2:
+            previous_node = None
             current_node = self.head
-            next_node = current_node.next
-            current_node.next = None
-            next_node.next = current_node
-            self.head = next_node
-        elif self.size > 2:
-            current_node = self.head
-            next_node = current_node.next
-            temp = next_node.next
-            while temp is not None:
-                temp = next_node.next
-                if current_node == self.head:
-                    current_node.next = None
-                    next_node.next = current_node
-                else:
-                    next_node.next = current_node
+            while current_node is not None:
+                next_node = current_node.next
+                current_node.next = previous_node
+                previous_node = current_node
                 current_node = next_node
-                next_node = temp
-            self.head = current_node
+            self.head = previous_node
         return f"List has been succcessfully reversed"
+    """
+    Made by chatgpt
+    """
+    def sort_lst(self ,asc=True):
+        if self.size < 2:
+            return "List is too short to sort"
+        if asc:
+            # Basic bubble sort implementation
+            change = True
+            while change:
+                change = False
+                # Using the first item as the head
+                current = self.head
+                while current.next is not None:
+                    # Storing the next node
+                    next_node = current.next
+                    if current.data > next_node.data:
+                        # Swap the data
+                        current.data, next_node.data = next_node.data, current.data
+                        change = True
+                    current = next_node
+        else:
+            change = True
+            while change:
+                change = False
+                current = self.head
+                while current.next is not None:
+                    next_node = current.next
+                    if current.data < next_node.data:
+                        # Swap the data
+                        current.data, next_node.data = next_node.data, current.data
+                        change = True
+                    current = next_node
+        return "Successfully sorted the linked list"
+    
+    def length(self):
+        return self.size
+    
+    def get_index(self,item):
+        counter = 0
+        current_node = self.head
+        while current_node is not None:
+            if current_node.data == item:
+                return counter
+            counter += 1
+            current_node = current_node.next
+        return -1
+    
+    def clear(self):
+        self.head = None
 
     def display(self):
         current_node = self.head
@@ -131,14 +180,3 @@ class LinkedList:
             current_node = current_node.next
         print("None")
         print(f"The size of the linked list is {self.size}")
-        return
-
-
-instance = LinkedList()
-instance.add_item(0)
-instance.add_item(1)
-instance.add_item(2)
-instance.add_item(3)
-instance.add_item(4)
-print(instance.reverse_list())
-instance.display()
